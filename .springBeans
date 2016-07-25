@@ -9,7 +9,6 @@
 	<configs>
 		<config>java:com.issueking.test.config.DBConfig</config>
 		<config>java:com.issueking.test.config.WebConfig</config>
-		<config>java:com.issueking.test.api.service.UserService</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

@@ -1,4 +1,4 @@
-package com.issueking.test.api.controller;
+package com.issueking.test.api.user.controller;
 
 
 import java.util.HashMap;
@@ -6,12 +6,11 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.issueking.test.api.service.UserService;
+import com.issueking.test.api.user.service.UserService;
 
 
 @RestController

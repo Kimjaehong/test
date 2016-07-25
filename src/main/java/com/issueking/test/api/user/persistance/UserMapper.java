@@ -1,4 +1,4 @@
-package com.issueking.test.api.persistance;
+package com.issueking.test.api.user.persistance;
 
 import java.util.List;
 import java.util.Map;

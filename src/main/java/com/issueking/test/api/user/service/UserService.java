@@ -1,4 +1,4 @@
-package com.issueking.test.api.service;
+package com.issueking.test.api.user.service;
 
 import java.util.Map;
 
@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.issueking.test.api.persistance.UserMapper;
+import com.issueking.test.api.user.persistance.UserMapper;
 
 import net.sf.json.JSONArray;
 
