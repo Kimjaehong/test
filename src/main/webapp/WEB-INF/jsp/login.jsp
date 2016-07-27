@@ -17,7 +17,27 @@
 
 </head>
 <body>
-    <h2>로그인</h2>
+ <c:url value="/login" var="loginUrl"/>
+ <form action="${loginUrl}" method="POST">
+        <c:if test="${param.error != null}">
+                <p>Invalid username and password.</p>
+        </c:if>
+        <c:if test="${param.logout != null}">
+                <p>You have been logged out.</p>
+        </c:if>
+        <p>
+            <label for="username">Username : </label>
+            <input type="text" id="username" name="username"/>       
+        </p>
+        <p>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"/>   
+        </p>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <button type="submit" class="btn">Log in</button>
+    </form>
+
+<!--     <h2>로그인</h2>
     <form id="frmLogin" method="post">
         <label>아이디</label>
             <input type="text" id="userId" name="userId"/>
@@ -26,7 +46,7 @@
             
        <input type="submit" value="login..." />
     </form>
-    <a href="javascript:void(0);" type="button" class="btn" onclick="f_login();">Log in</a>
+    <a href="javascript:void(0);" type="button" class="btn" onclick="f_login();">Log in</a> -->
 </body>
 
 <script type="text/javascript">

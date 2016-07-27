@@ -14,6 +14,7 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import com.issueking.test.config.DBConfig;
+import com.issueking.test.config.SecurityConfig;
 import com.issueking.test.config.WebConfig;
 
 public class WebApplicationInitialize implements WebApplicationInitializer{
@@ -29,6 +30,7 @@ public class WebApplicationInitialize implements WebApplicationInitializer{
         
         AnnotationConfigWebApplicationContext rootContext  = new AnnotationConfigWebApplicationContext();
         rootContext.register(DBConfig.class);
+        rootContext.register(SecurityConfig.class);
         
         servletContext.addListener(new ContextLoaderListener(rootContext));
         
