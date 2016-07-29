@@ -1,9 +1,22 @@
 package com.issueking.test.api.service.user;
 
-import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-public interface UserService {
+import com.issueking.test.api.dao.user.User;
+import com.issueking.test.api.dao.user.UserDao;
+
+@Service
+public class UserService implements UserDetailsService {
     
-    public Map<String, String> processUserLogin(String userId, String userPwd);
+    @Autowired
+    private UserDao userDao;
+ 
+    @Override
+    public User loadUserByUsername(final String username) throws UsernameNotFoundException {
+        return userDao.loadUserByUsername(username);
+    }
 
 }

@@ -29,7 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.issueking.test")
-//@Import({ SecurityConfig.class })
+//@Import(SecurityConfig.class)
 public class WebConfig extends WebMvcConfigurerAdapter {
     
     @Override

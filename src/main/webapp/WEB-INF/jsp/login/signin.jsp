@@ -7,18 +7,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>사용자 정보</title>
+<%-- <%@ taglib prefix="sec" url="http://www.springframwork.org/security/tag" %>
+ --%><title>사용자 정보</title>
 
-<%--
-<script src="${pageContext.request.contextPath}/resources/js/libs/jquery-2.1.1.min.js"></script>
- --%>
 <script src=<c:url value="/resources/js/libs/jquery-2.1.1.min.js" />></script>
 <script src="http://malsup.github.com/jquery.form.js"></script> 
 
 </head>
 <body>
- <c:url value="/login" var="loginUrl"/>
- <form action="${loginUrl}" method="POST">
+<h2>영원히비와</h2>
+ <form id="frmLogin" name="frmLogin" action="/loginProcess" method="POST">
         <c:if test="${param.error != null}">
                 <p>Invalid username and password.</p>
         </c:if>
@@ -26,8 +24,8 @@
                 <p>You have been logged out.</p>
         </c:if>
         <p>
-            <label for="username">Username : </label>
-            <input type="text" id="username" name="username"/>       
+            <label for="userId">UserID : </label>
+            <input type="text" id="userId" name="userId"/>       
         </p>
         <p>
             <label for="password">Password</label>
@@ -52,16 +50,16 @@
 <script type="text/javascript">
 
 //$(document).ready(function() {
-	$("#frmLogin").on('submit', function() {
+	/* $("#frmLogin").on('submit', function() {
 		console.debug(this)
 		$(this).ajaxSubmit({
-			url: '<c:url value="/apis/user/login"/>',
+			url: '<c:url value="/apis/user/signin"/>',
 			success:function(response) {
 				console.debug(response);
 			}
 		});
 		return false;
-	});
+	}); */
 //});
 
 function f_login() {
