@@ -49,7 +49,7 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
             roles.add(a.getAuthority());
         }
         
-        logger.debug(roles);
+        logger.debug("CustomLoginSuccessHandler roles:::"+roles);
  
         if (isDba(roles)) {
             url = "/db";

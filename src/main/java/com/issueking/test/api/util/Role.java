@@ -1,33 +1,32 @@
 package com.issueking.test.api.util;
 
-import java.util.List;
-
 import org.springframework.security.core.GrantedAuthority;
 
 public class Role implements GrantedAuthority {
     private static final long serialVersionUID = 1L;
-    private String name;
+    private String username;
+    private String privileges;
  
-    private List<Privilege> privileges;
+
  
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
- 
-    public void setName(String name) {
-        this.name = name;
+
+    public void setUsername(String username) {
+        this.username = username;
     }
- 
+
     @Override
     public String getAuthority() {
-        return this.name;
+        return this.privileges;
     }
  
-    public List<Privilege> getPrivileges() {
+    public String getPrivileges() {
         return privileges;
     }
  
-    public void setPrivileges(List<Privilege> privileges) {
+    public void setPrivileges(String privileges) {
         this.privileges = privileges;
     }
  
@@ -35,7 +34,7 @@ public class Role implements GrantedAuthority {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Role [name=");
-        builder.append(name);
+        builder.append(username);
         builder.append(", privileges=");
         builder.append(privileges);
         builder.append("]");

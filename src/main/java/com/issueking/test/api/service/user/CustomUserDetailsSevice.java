@@ -29,31 +29,19 @@ public class CustomUserDetailsSevice implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     
     CustomUserDetails customUserDetails = userMapper.getUser(username);
-    //CustomUserDetails customUserDetails = userMapper.getAuthority(username);
-    
-    logger.info("customUserDetails::::::::"+customUserDetails);
     
     customUserDetails.setUsername(customUserDetails.getUsername());
     logger.info("encoded pwd :::::"+new BCryptPasswordEncoder().encode(customUserDetails.getPassword()));
-    customUserDetails.setPassword(new BCryptPasswordEncoder().encode(customUserDetails.getPassword()));
-    
-    String defaultAuthority = "Anonymous";
-    
-    Collection<Role> authorities = (Collection<Role>) userMapper.getAuthority(username);
-    logger.debug("authorities::::::"+authorities);
-    boolean flag = true;
-    
-    for (Role role : authorities) {
-        if (role.getAuthority().equals(defaultAuthority)) {
-            flag = false;
-        }
-    }
-    if (flag) {
-        Role role = new Role();
-        role.setAuthority(defaultAuthority);
-        authorities.add(role);
-    }
+    customUserDetails.setPassword(customUserDetails.getPassword());
    
+    Collection<Role> roles = userMapper.getAuthority(username);
+    logger.info("userMapper :::::"+userMapper.getAuthority(username));
+    for (Role role : roles) {
+        List<Role> userRoles = new ArrayList<Role>();
+        userRoles.add(role);
+        customUserDetails.setAuthorities(userRoles);
+    }
+    logger.info("customUserDetails :::::"+customUserDetails);
     return customUserDetails;
     }
 }

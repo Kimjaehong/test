@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/admin/**").hasRole("ADMIN")
             .antMatchers("/login/signin").permitAll()
-            .antMatchers("/index/**").hasAnyRole("USER")
+            .antMatchers("/index/**").hasAnyRole("USER","ADMIN")
             //.antMatchers("/login/signin").hasAnyRole("ANONYMOUS")
             .antMatchers("/**").hasAnyRole("ANONYMOUS", "USER", "ADMIN")
             /*.antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")*/
@@ -88,8 +88,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
         .authenticationProvider(customAuthenticationProvider())
         .userDetailsService(customUserDetailsSevice());
-            /*.jdbcAuthentication()
-            .dataSource(dataSource);*/
     }
     
     @Bean

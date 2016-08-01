@@ -13,5 +13,5 @@ public interface UserMapper {
     public CustomUserDetails getUser(String username);
     
     @Select("SELECT * FROM authorities WHERE username = #{username}")
-    public Collection<Role> getAuthority(String username);
+    public  Collection<Role> getAuthority(String username);
 }
