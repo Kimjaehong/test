@@ -42,4 +42,9 @@ public class Role implements GrantedAuthority {
         return builder.toString();
     }
 
+    public void setAuthority(String defaultAuthority) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

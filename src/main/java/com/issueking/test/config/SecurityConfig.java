@@ -1,6 +1,5 @@
 package com.issueking.test.config;
 
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.issueking.test.api.service.user.UserService;
+import com.issueking.test.api.service.user.CustomUserDetailsSevice;
 import com.issueking.test.api.util.CustomAuthenticationProvider;
 import com.issueking.test.api.util.CustomLoginSuccessHandler;
 import com.issueking.test.api.util.CustomLogoutHandler;
@@ -30,26 +29,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         
     @Bean
     public CustomLoginSuccessHandler customLoginSuccessHandler() {
-        CustomLoginSuccessHandler customSuccessHandler = new CustomLoginSuccessHandler();
-        return customSuccessHandler;
+        return  new CustomLoginSuccessHandler();
     }
     
     @Bean
     public CustomLogoutHandler customLogoutHandler() {
-        CustomLogoutHandler customLogoutHandler = new CustomLogoutHandler();
-        return customLogoutHandler;
+        return new CustomLogoutHandler();
     }
     
     @Bean
-    public UserService userService() {
-        UserService userService = new UserService();
-        return userService;
+    public CustomUserDetailsSevice customUserDetailsSevice() {
+        return new CustomUserDetailsSevice();
     }
     
     @Bean
     public CustomAuthenticationProvider customAuthenticationProvider() {
-        CustomAuthenticationProvider customAuthenticationProvider = new CustomAuthenticationProvider();
-        return customAuthenticationProvider;
+        return new CustomAuthenticationProvider();
     }
      
     //Spring Security ignores request to static resources such as CSS or JS files.
@@ -92,19 +87,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
         .authenticationProvider(customAuthenticationProvider())
-        .userDetailsService(userService());
+        .userDetailsService(customUserDetailsSevice());
             /*.jdbcAuthentication()
             .dataSource(dataSource);*/
     }
     
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
     
     /*@Bean
     public ReflectionSaltSource saltSource() {
-        ReflectionSaltSource saltSource = new ReflectionSaltSource();
-        return saltSource;
+        return new ReflectionSaltSource();
     }*/
 }

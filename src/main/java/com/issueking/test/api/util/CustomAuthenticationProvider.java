@@ -9,35 +9,49 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.issueking.test.api.dao.user.User;
-import com.issueking.test.api.service.user.UserService;
+import com.issueking.test.api.bean.user.CustomUserDetails;
+import com.issueking.test.api.service.user.CustomUserDetailsSevice;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
     
     @Autowired
-    private UserService userService;
+    private CustomUserDetailsSevice customUserDetailsSevice;
+    
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
     
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
  
-        User user = userService.loadUserByUsername(username);
- 
-        if (user == null) {
-            throw new BadCredentialsException("Username not found.");
+        Collection<? extends GrantedAuthority> authorities;
+        try {
+            CustomUserDetails customUserDetails = (CustomUserDetails) customUserDetailsSevice.loadUserByUsername(username);
+            
+            if (!passwordEncoder.matches(password, customUserDetails.getPassword())) 
+                throw new BadCredentialsException("비밀번호 불일치");
+     
+            authorities = customUserDetails.getAuthorities();
+            
+        } catch(UsernameNotFoundException e) {
+            e.printStackTrace();
+            throw new UsernameNotFoundException(e.getMessage());
+        } catch(BadCredentialsException e) {
+            e.printStackTrace();
+            throw new BadCredentialsException(e.getMessage());
+        } catch(Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
         }
  
-        if (!password.equals(user.getPassword())) {
-            throw new BadCredentialsException("Wrong password.");
-        }
- 
-        Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
- 
-        return new UsernamePasswordAuthenticationToken(user, password, authorities);
+        return new UsernamePasswordAuthenticationToken(username, password, authorities);
     }
  
     @Override

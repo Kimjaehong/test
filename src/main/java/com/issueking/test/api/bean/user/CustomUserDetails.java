@@ -1,4 +1,4 @@
-package com.issueking.test.api.dao.user;
+package com.issueking.test.api.bean.user;
 
 import java.util.Collection;
 import java.util.List;
@@ -8,9 +8,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.issueking.test.api.util.Role;
 
-public class User implements UserDetails {
+public class CustomUserDetails implements UserDetails {
+    
     private static final long serialVersionUID = 1L;
- 
+    
     private String username;
     private String password;
     private String email;
@@ -23,7 +24,7 @@ public class User implements UserDetails {
     private boolean accountNonLocked = true;
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
- 
+
     @Override
     public String getUsername() {
         return username;
@@ -137,4 +138,5 @@ public class User implements UserDetails {
         builder.append("]");
         return builder.toString();
     }
+
 }
