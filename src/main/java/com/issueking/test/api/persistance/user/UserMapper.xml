@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.issueking.test.api.persistance.user.UserMapper">
-	<!-- 
-	<select id="processUserLogin" resultType="map">
-		SELECT * FROM user_mst
+	
+	<select id="getUser" resultType="com.issueking.test.api.bean.user.CustomUserDetails">
+		SELECT * FROM users WHERE username = #{username}
 	</select>
-	 -->
+	 
 </mapper>
