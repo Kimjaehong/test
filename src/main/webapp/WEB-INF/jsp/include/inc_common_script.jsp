@@ -37,3 +37,5 @@
 		
 		<!-- CUSTOM : APPLICATION COMMON JS -->
 		<script src="${pageContext.request.contextPath}/resources/js/application/common/common.js"></script>
+        
+    <script src="http://malsup.github.com/jquery.form.js"></script> 

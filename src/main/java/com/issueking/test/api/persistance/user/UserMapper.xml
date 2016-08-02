@@ -6,5 +6,6 @@
 	<select id="getUser" resultType="com.issueking.test.api.bean.user.CustomUserDetails">
 		SELECT * FROM users WHERE username = #{username}
 	</select>
-	 
+	
+ 
 </mapper>

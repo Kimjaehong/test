@@ -27,7 +27,7 @@
 			</div>
 			<!-- 회원가입 버튼 -->
 			<span id="extr-page-header-space"> <span class="hidden-mobile hidden-xs">Need an account?</span> 
-				<a href="javascript:void(0);" onclick="f_signUpOpen();" class="btn btn-danger">Create account</a></span>
+				<a href="/signup" class="btn btn-danger">회원가입</a></span>
 			
 		</header>
 
@@ -90,7 +90,7 @@
 				
 		
 		<!-- 회원가입 화면 -->
-		<jsp:include page="/WEB-INF/jsp/application/login/signUp.jsp" flush="false"/>
+		<%-- <jsp:include page="/WEB-INF/jsp/application/login/signUp.jsp" flush="false"/> --%>
 
 		<!--================================================== -->
 		

@@ -58,15 +58,32 @@ function f_signUpCancel() {
  * 회원가입
  * ==================================================================================
  */
-function f_signUp(){
+
+$(document).ready(function() {
+	$("#frmSignUp").on('submit', function() {
+		console.log(this)
+		$(this).ajaxSubmit({
+			type: 'POST',
+			url: '/apis/user/signup',
+			success:function(response) {
+				console.log(response);
+				alert("회원가입완료");
+				location.href = "/";
+			}
+		});
+		return false;
+	}); 
+});
+
+/*function f_signUp(){
 	
 	var frm = $("#frmSignUp");
 	var send_data = frm.serializeObject();
 	
 	//frm.find('.btn-primary').addClass('disabled');
-	
+	console.log(send_data);
 	$.ajax({
-		url: bizUrl + '/user/signUp',
+		url: 'apis/user/signup',
 		type: 'POST',
 		async: true,
 	    cache: false,
@@ -86,5 +103,5 @@ function f_signUp(){
 	    },
 	});
 	
-}
+}*/
 

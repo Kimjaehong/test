@@ -40,6 +40,11 @@ public class HelloController {
 	        return "application/login/signin";
 	    }
 	    
+	    @RequestMapping(value = {"/signup"}, method = RequestMethod.GET)
+        public String signupPage() {
+            return "application/login/signUp";
+        }
+	    
 	    @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
         public String indexPage(ModelMap model) {
 	        model.addAttribute("user", getPrincipal());

@@ -1,16 +1,21 @@
 package com.issueking.test.config;
 
+import java.security.AuthProvider;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.ReflectionSaltSource;
+import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -65,8 +70,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/admin/**").hasRole("ADMIN")
             .antMatchers("/index/**").hasAnyRole("USER", "ADMIN")
-            //.antMatchers("/**").permitAll()
-            .antMatchers("/**").hasAnyRole("ANONYMOUS","USER", "ADMIN")
+            .antMatchers("/**").permitAll()
+            //.antMatchers("/**").hasAnyRole("ANONYMOUS","USER", "ADMIN")
             //.antMatchers("/admin/**").hasRole("ADMIN")
             .and()
             .formLogin()
@@ -89,9 +94,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        
+        ReflectionSaltSource saltSource = new ReflectionSaltSource();
+        saltSource.setUserPropertyToUse("username");
+        
         auth
         .authenticationProvider(customAuthenticationProvider())
-        .userDetailsService(customUserDetailsSevice());
+        .userDetailsService(customUserDetailsSevice()).passwordEncoder(passwordEncoder());
     }
     
     @Bean
@@ -99,7 +108,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder(10);
     }
     
-    /*@Bean
+/*   @Bean
     public ReflectionSaltSource saltSource() {
         return new ReflectionSaltSource();
     }*/

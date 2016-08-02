@@ -1,7 +1,10 @@
 package com.issueking.test.api.persistance.user;
 
 import java.util.Collection;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +19,20 @@ public interface UserMapper {
     
     @Select("SELECT * FROM authorities WHERE username = #{username}")
     public  Collection<Role> getAuthority(String username);
+    
+    /*@Insert("INSERT INTO users(username, password, name, enable) VALUE(#{userInfo.userId}, #{userInfo.password}, #{userInfo.name}, #{userInfo.enable})")
+    public Map<String, Object> insertUser(Map<String, Object> userInfo);
+    
+    @Insert("INSERT INTO authorities(username, authority) VALUE(#{username}, #{authority})")
+    public String insertAuthorities(String username, String authority);*/
+    
+    @Insert("INSERT INTO users(username, password, name, enabled) VALUE ( #{username}, #{encodedPassword}, #{name}, #{enabled})")
+    public int insertUser(@Param("username") String username, 
+                             @Param("encodedPassword") String encodedPassword,
+                             @Param("name") String name,
+                             @Param("enabled") int enabled);
+    
+    @Insert("INSERT INTO authorities(username, privileges) VALUE(#{username}, #{authority})")
+    public int insertAuthorities(@Param("username") String username,
+                                @Param("authority") String authority);
 }
