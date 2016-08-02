@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.issueking.test.api.service.user.CustomUserDetailsSevice;
+import com.issueking.test.api.util.CustomAccessDeniedHandler;
 import com.issueking.test.api.util.CustomAuthenticationProvider;
 import com.issueking.test.api.util.CustomLoginSuccessHandler;
 import com.issueking.test.api.util.CustomLogoutHandler;
@@ -46,13 +47,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public CustomAuthenticationProvider customAuthenticationProvider() {
         return new CustomAuthenticationProvider();
     }
+    
+    @Bean
+    public CustomAccessDeniedHandler customAccessDeniedHandler() {
+        return new CustomAccessDeniedHandler();
+    }
      
     //Spring Security ignores request to static resources such as CSS or JS files.
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web
-            .ignoring()
-            .antMatchers("/resources/**");
+        web.ignoring().antMatchers("/resources/**");
     }
     
     @Override
@@ -60,12 +64,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .antMatchers("/admin/**").hasRole("ADMIN")
-            .antMatchers("/login/signin").permitAll()
-            .antMatchers("/index/**").hasAnyRole("USER","ADMIN")
-            //.antMatchers("/login/signin").hasAnyRole("ANONYMOUS")
-            .antMatchers("/**").hasAnyRole("ANONYMOUS", "USER", "ADMIN")
-            /*.antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")*/
-        .and()
+            .antMatchers("/index/**").hasAnyRole("USER", "ADMIN")
+            //.antMatchers("/**").permitAll()
+            .antMatchers("/**").hasAnyRole("ANONYMOUS","USER", "ADMIN")
+            //.antMatchers("/admin/**").hasRole("ADMIN")
+            .and()
             .formLogin()
                 .usernameParameter("userId")
                 .passwordParameter("password")
@@ -78,9 +81,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .logout()
                 .logoutUrl("/logout")
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessHandler(customLogoutHandler());
+                .logoutSuccessHandler(customLogoutHandler())
                 //.invalidateHttpSession(true)                                             
                 //.logoutSuccessUrl("/login/signin")
+                .and().exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
     }
     
     @Override

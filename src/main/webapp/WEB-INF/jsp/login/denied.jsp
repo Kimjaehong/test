@@ -14,6 +14,11 @@
      <body>
 
      <h1>권한이 없습니다.</h1>
+     
+     <form action="<c:url value="/login/signin" />" method="post">
+        <button type="submit" class="btn">Log in 페이지 이동</button>
+        <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
+     </form>
 
      </body>
 
