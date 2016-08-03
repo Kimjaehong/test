@@ -1,17 +1,13 @@
 package com.issueking.test.api.service.user;
 
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.issueking.test.api.persistance.user.UserMapper;
-import com.issueking.test.view.HelloController;
 
 @Component
 @Service("UserService")
@@ -46,7 +42,7 @@ public class UserServiceImpl implements UserService {
         logger.info("encodedPassword::::::::::::::::::::::::::"+encodedPassword);
         userMapper.insertUser(userId, encodedPassword, name, enabled);
         
-        String authority = "Role_User";
+        String authority = "ROLE_USER";
         userMapper.insertAuthorities(userId, authority);
     }
 }
