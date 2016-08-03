@@ -24,22 +24,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
     
-    /*public void insertUser(Map<String, Object> paramMap) throws Exception {
-        
-        Boolean enable = true;
-        paramMap.put("enable", enable);
-        userMapper.insertUser(paramMap);
-        
-        String userId = (String) paramMap.get("userId");
-        String authority = "Role_User";
-        userMapper.insertAuthorities(userId, authority);
-        
-    }*/
     public void insertUser(String userId, String name, String password) throws Exception {
+        
         int enabled = 1;
         String encodedPassword = passwordEncoder.encode(password);
-        logger.info("userId::::::::::::::::::::::::::"+userId);
-        logger.info("encodedPassword::::::::::::::::::::::::::"+encodedPassword);
         userMapper.insertUser(userId, encodedPassword, name, enabled);
         
         String authority = "ROLE_USER";

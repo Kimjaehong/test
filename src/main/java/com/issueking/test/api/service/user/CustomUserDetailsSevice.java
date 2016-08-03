@@ -11,11 +11,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.issueking.test.api.bean.user.CustomUserDetails;
 import com.issueking.test.api.persistance.user.UserMapper;
 import com.issueking.test.base.util.Role;
+
 
 @Service("CustomUserDetailsSevice")
 public class CustomUserDetailsSevice implements UserDetailsService {
@@ -31,17 +33,14 @@ public class CustomUserDetailsSevice implements UserDetailsService {
     CustomUserDetails customUserDetails = userMapper.getUser(username);
     
     customUserDetails.setUsername(customUserDetails.getUsername());
-    logger.info("encoded pwd :::::"+new BCryptPasswordEncoder().encode(customUserDetails.getPassword()));
     customUserDetails.setPassword(customUserDetails.getPassword());
    
     Collection<Role> roles = userMapper.getAuthority(username);
-    logger.info("userMapper :::::"+userMapper.getAuthority(username));
     for (Role role : roles) {
         List<Role> userRoles = new ArrayList<Role>();
         userRoles.add(role);
         customUserDetails.setAuthorities(userRoles);
     }
-    logger.info("customUserDetails :::::"+customUserDetails);
     return customUserDetails;
     }
 }

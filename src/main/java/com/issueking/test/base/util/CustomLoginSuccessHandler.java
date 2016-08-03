@@ -7,25 +7,48 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+
+import com.issueking.test.api.bean.user.CustomUserDetails;
+import com.issueking.test.api.service.user.CustomUserDetailsSevice;
 
 @Component
 public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
- 
+    
+    private static final Logger logger = LoggerFactory.getLogger(CustomLoginSuccessHandler.class);
+    
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
- 
+    
+    @Autowired
+    CustomUserDetailsSevice customUserDetailsSevice;
+    
     @Override
     protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException {
+        
+        CustomUserDetails customUserDetails = (CustomUserDetails) customUserDetailsSevice.loadUserByUsername(authentication.getName());
+        
+        //사용자정보
+        request.getSession().setAttribute("userId", customUserDetails.getUsername());
+        request.getSession().setAttribute("userName", customUserDetails.getName());
+        request.getSession().setAttribute("roles", authentication.getAuthorities());
+        
+        //메뉴정보
+        //session.setAttribute(CommonConstant.ADMIN_SESSION_KEY_MENU, userInfo.get("menu_list");
+        
         String targetUrl = determineTargetUrl(authentication);
- 
+        
         if (response.isCommitted()) {
             System.out.println("Can't redirect");
             return;
@@ -51,11 +74,12 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         
         logger.debug("CustomLoginSuccessHandler roles:::"+roles);
  
-        if (isDba(roles)) {
+        /*if (isDba(roles)) {
             url = "/db";
         } else if (isAdmin(roles)) {
             url = "/admin";
-        } else if (isUser(roles)) {
+        } else*/
+        if (isUser(roles) || isAdmin(roles)) {
             url = "/index";
         } else {
             url = "/accessDenied";

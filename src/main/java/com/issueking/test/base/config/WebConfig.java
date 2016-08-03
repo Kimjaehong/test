@@ -31,7 +31,6 @@ import com.issueking.test.base.cors.CorsInterceptor;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.issueking.test")
-//@Import(SecurityConfig.class)
 public class WebConfig extends WebMvcConfigurerAdapter {
     
     @Override

@@ -11,10 +11,9 @@ import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuc
 
 public class CustomLogoutHandler extends SimpleUrlLogoutSuccessHandler {
     
-    final private static String logoutSuccessUrl = "login/signin";
+    final private static String logoutSuccessUrl = "/";
 
-    public void onLogoutSuccess
-      (HttpServletRequest request, HttpServletResponse response, Authentication authentication) 
+    public void onLogoutSuccess (HttpServletRequest request, HttpServletResponse response, Authentication authentication) 
       throws IOException, ServletException {
         
         request.getSession().invalidate();

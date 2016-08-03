@@ -22,6 +22,7 @@ import com.issueking.test.api.service.user.CustomUserDetailsSevice;
 public class CustomAuthenticationProvider implements AuthenticationProvider {
     
     private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
+    
     @Autowired
     private CustomUserDetailsSevice customUserDetailsSevice;
     

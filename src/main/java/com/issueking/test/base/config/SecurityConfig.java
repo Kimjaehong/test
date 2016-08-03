@@ -1,7 +1,5 @@
 package com.issueking.test.base.config;
 
-import java.security.AuthProvider;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +7,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.ReflectionSaltSource;
-import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.issueking.test.api.service.user.CustomUserDetailsSevice;
 import com.issueking.test.base.util.CustomAccessDeniedHandler;
@@ -71,25 +66,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/admin/**").hasRole("ADMIN")
             .antMatchers("/index/**").hasAnyRole("USER", "ADMIN")
             .antMatchers("/**").permitAll()
-            //.antMatchers("/**").hasAnyRole("ANONYMOUS","USER", "ADMIN")
-            //.antMatchers("/admin/**").hasRole("ADMIN")
-            .and()
+        .and()
             .formLogin()
                 .usernameParameter("userId")
                 .passwordParameter("password")
                 .loginPage("/login")
                 .loginProcessingUrl("/loginProcess")
+                .successHandler(customLoginSuccessHandler())
                 //.defaultSuccessUrl("/index", true)
                 .failureUrl("/login/signin?fail=true")
-                .successHandler(customLoginSuccessHandler())
         .and()
             .logout()
                 .logoutUrl("/logout")
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessHandler(customLogoutHandler())
-                //.invalidateHttpSession(true)                                             
-                //.logoutSuccessUrl("/login/signin")
-                .and().exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
+        .and()
+            .exceptionHandling()
+            .accessDeniedHandler(customAccessDeniedHandler());
     }
     
     @Override

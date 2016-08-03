@@ -17,9 +17,6 @@ public class UserController {
     
     private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
     
-   /* @Autowired 
-    BCryptPasswordEncoder passwordEncoder;*/
-       
     @Autowired
     private UserService userService;
     
@@ -27,17 +24,7 @@ public class UserController {
     public String insertUser(@RequestParam("userId") String userId, 
                             @RequestParam("userName") String name, 
                             @RequestParam("password") String password)  throws Exception {
-        logger.info("insertUser::::::::::::::::::::::::::"+name);
-        logger.info("insertUser::::::::::::::::::::::::::"+userId);
-        
-        //String encodedPassword = passwordEncoder.encode(password);
-        //logger.info("encodedPassword::::::::::::::::::::::::::"+encodedPassword);
-        
-       /* Map<String, Object> paramMap = new HashMap<String, Object>();
-        paramMap.put("userName", userName);
-        paramMap.put("userId", userId);
-        paramMap.put("password", encodedPassword);*/
-        
+               
         userService.insertUser(userId, name, password);
         
         return "/application/index";

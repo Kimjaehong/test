@@ -17,21 +17,17 @@ public class HelloController {
 	private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
 	 
         @RequestMapping(value = "/admin", method = RequestMethod.GET)
-	    public String adminPage(ModelMap model) {
-	        model.addAttribute("user", getPrincipal());
-	        logger.debug("admin::::::::::::::::::::::::::"+model);
+	    public String adminPage() {
 	        return "application/login/index";
 	    }
 	     
 	    @RequestMapping(value = "/db", method = RequestMethod.GET)
-	    public String dbaPage(ModelMap model) {
-	        model.addAttribute("user", getPrincipal());
+	    public String dbaPage() {
 	        return "dba";
 	    }
 	 
 	    @RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
-	    public String accessDeniedPage(ModelMap model) {
-	        model.addAttribute("user", getPrincipal());
+	    public String accessDeniedPage() {
 	        return "login/denied";
 	    }
 	 
@@ -49,24 +45,5 @@ public class HelloController {
         public String mainPage() {
             return "application/index";
         }
-	    
-	    /*@RequestMapping(value = {"/index"}, method = RequestMethod.GET)
-        public String indexPage(ModelMap model) {
-	        model.addAttribute("user", getPrincipal());
-	        logger.debug("user::::::::::::::::::::::::::"+model);
-            return "application/login/index";
-        }*/
-	  
-	    private String getPrincipal(){
-	        String userName = null;
-	        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	 
-	        if (principal instanceof CustomUserDetails) {
-	            userName = ((CustomUserDetails)principal).getUsername();
-	        } else {
-	            userName = principal.toString();
-	        }
-	        return userName;
-	    }
 	
 }
