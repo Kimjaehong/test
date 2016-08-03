@@ -77,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin()
                 .usernameParameter("userId")
                 .passwordParameter("password")
-                .loginPage("/login/signin")
+                .loginPage("/login")
                 .loginProcessingUrl("/loginProcess")
                 //.defaultSuccessUrl("/index", true)
                 .failureUrl("/login/signin?fail=true")

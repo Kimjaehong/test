@@ -35,7 +35,7 @@ public class HelloController {
 	        return "login/denied";
 	    }
 	 
-	    @RequestMapping(value = {"/", "/login/signin"}, method = RequestMethod.GET)
+	    @RequestMapping(value = {"/login/signin"}, method = RequestMethod.GET)
 	    public String loginPage() {
 	        return "application/login/signin";
 	    }
@@ -45,12 +45,17 @@ public class HelloController {
             return "application/login/signup";
         }
 	    
-	    @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
+	    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+        public String mainPage() {
+            return "application/index";
+        }
+	    
+	    /*@RequestMapping(value = {"/index"}, method = RequestMethod.GET)
         public String indexPage(ModelMap model) {
 	        model.addAttribute("user", getPrincipal());
 	        logger.debug("user::::::::::::::::::::::::::"+model);
             return "application/login/index";
-        }
+        }*/
 	  
 	    private String getPrincipal(){
 	        String userName = null;

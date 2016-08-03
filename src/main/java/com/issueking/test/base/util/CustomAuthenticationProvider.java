@@ -2,6 +2,8 @@ package com.issueking.test.base.util;
 
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -19,6 +21,7 @@ import com.issueking.test.api.service.user.CustomUserDetailsSevice;
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
     
+    private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
     @Autowired
     private CustomUserDetailsSevice customUserDetailsSevice;
     
@@ -30,7 +33,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
- 
+        
+        logger.info(password);
+        
         Collection<? extends GrantedAuthority> authorities;
         try {
             CustomUserDetails customUserDetails = (CustomUserDetails) customUserDetailsSevice.loadUserByUsername(username);
