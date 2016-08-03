@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.issueking.test.api.bean.user.CustomUserDetails;
 import com.issueking.test.api.persistance.user.UserMapper;
-import com.issueking.test.api.util.Role;
+import com.issueking.test.base.util.Role;
 
 @Service("CustomUserDetailsSevice")
 public class CustomUserDetailsSevice implements UserDetailsService {

@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.issueking.test.api.util.Role;
+import com.issueking.test.base.util.Role;
 
 public class CustomUserDetails implements UserDetails {
     

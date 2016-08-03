@@ -1,4 +1,4 @@
-package com.issueking.test.Initializer;
+package com.issueking.test.base.Initializer;
 
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
@@ -13,9 +13,9 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.issueking.test.config.DBConfig;
-import com.issueking.test.config.SecurityConfig;
-import com.issueking.test.config.WebConfig;
+import com.issueking.test.base.config.DBConfig;
+import com.issueking.test.base.config.SecurityConfig;
+import com.issueking.test.base.config.WebConfig;
 
 public class WebApplicationInitialize implements WebApplicationInitializer{
     

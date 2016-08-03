@@ -1,4 +1,4 @@
-package com.issueking.test.Initializer;
+package com.issueking.test.base.Initializer;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

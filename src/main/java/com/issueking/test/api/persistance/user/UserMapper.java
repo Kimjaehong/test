@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import com.issueking.test.api.bean.user.CustomUserDetails;
-import com.issueking.test.api.util.Role;
+import com.issueking.test.base.util.Role;
 
 @Repository(value="UserMapper")
 public interface UserMapper {

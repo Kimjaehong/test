@@ -10,7 +10,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.issueking.test.api.controller.user.UserController;
 import com.issueking.test.api.persistance.user.UserMapper;
 import com.issueking.test.api.service.user.UserServiceImpl;
-import com.issueking.test.config.WebConfig;
+import com.issueking.test.base.config.WebConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebConfig.class})

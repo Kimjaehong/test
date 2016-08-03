@@ -1,4 +1,4 @@
-package com.issueking.test.config;
+package com.issueking.test.base.config;
 
 import java.security.AuthProvider;
 
@@ -20,10 +20,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.issueking.test.api.service.user.CustomUserDetailsSevice;
-import com.issueking.test.api.util.CustomAccessDeniedHandler;
-import com.issueking.test.api.util.CustomAuthenticationProvider;
-import com.issueking.test.api.util.CustomLoginSuccessHandler;
-import com.issueking.test.api.util.CustomLogoutHandler;
+import com.issueking.test.base.util.CustomAccessDeniedHandler;
+import com.issueking.test.base.util.CustomAuthenticationProvider;
+import com.issueking.test.base.util.CustomLoginSuccessHandler;
+import com.issueking.test.base.util.CustomLogoutHandler;
 
 @Configuration
 @EnableWebSecurity

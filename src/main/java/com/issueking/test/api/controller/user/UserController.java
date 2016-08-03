@@ -40,6 +40,6 @@ public class UserController {
         
         userService.insertUser(userId, name, password);
         
-        return "/application/login/signUp";
+        return "/application/login/signup";
     }
 }

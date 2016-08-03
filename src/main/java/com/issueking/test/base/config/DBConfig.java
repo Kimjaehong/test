@@ -1,4 +1,4 @@
-package com.issueking.test.config;
+package com.issueking.test.base.config;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;

@@ -1,4 +1,4 @@
-package com.issueking.test.api.util;
+package com.issueking.test.base.util;
 
 import java.io.IOException;
 
