@@ -13,7 +13,7 @@
     		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     		<jsp:include page="/WEB-INF/jsp/include/inc_common_style.jsp" flush="false"/>
     		<jsp:include page="/WEB-INF/jsp/include/inc_common_script.jsp" flush="false"/>
-          
+        <script src="${pageContext.request.contextPath}/resources/js/application/login/login.js"></script>  
     </head>
     <body class="desktop-detected fixed-header fixed-navigation fixed-ribbon">
     <header id="header">
@@ -26,12 +26,11 @@
             </div>
             <c:choose>
                 <c:when test="${sessionScope.userId eq null || sessionScope.userId eq ''}">
-            <div class="btn-header transparent pull-right">
-            <!-- <span> <button href="javascript:void(0);" id="btn_signup" class="fs-13 pd-rl7 btn-danger" title="회원가입" onclick="f_signupOpen();"> 회원가입 </button> </span> -->
+             <div class="btn-header transparent pull-right">
                  <span> <a href="javascript:void(0);" id="btn_signup" class="fs-13 pd-rl7 btn-danger" title="회원가입" onclick="f_signupOpen();"> 회원가입 </a> </span>
             </div>
             <div class="btn-header transparent pull-right">
-                <span> <a href="javascript:void(0);" id="btn_login" class="fs-13 pd-rl7 btn-primary" title="로그인" onclick="f_LoginOpen();"> 로그인 </a> </span>
+                <span> <a href="javascript:void(0);" id="btn_login" class="fs-13 pd-rl7 btn-primary" title="로그인" onclick="f_openLoginRD();"> 로그인 </a> </span>
             </div>
                 </c:when>
                 <c:otherwise>
@@ -68,15 +67,15 @@
             <ol class="breadcrumb">
             </ol>
         </div>
-        <c:choose>
+        <%-- <c:choose>
             <c:when test="${sessionScope.userId eq null || sessionScope.userId eq ''}">
                 <jsp:include page="/WEB-INF/jsp/application/login.jsp" flush="false"/>
                 <jsp:include page="/WEB-INF/jsp/application/signup.jsp" flush="false"/>
             </c:when>
             <c:otherwise>
-          <%--  <jsp:include page="/WEB-INF/jsp/include/inc_myinfo.jsp" flush="false"/> --%>
+           <jsp:include page="/WEB-INF/jsp/include/inc_myinfo.jsp" flush="false"/>
         </c:otherwise>
-        </c:choose>
+        </c:choose> --%>
         <div id="content">
     
         </div>
@@ -93,10 +92,84 @@
     <![endif]-->
     
     <jsp:include page="/WEB-INF/jsp/include/inc_plugins_script.jsp" flush="false"/>
-        
-    <script type="text/javascript">
+    <div id="login_rd"></div>    
+    <div id="signup_rd"></div>
     
-    	</script>
+    <script type="text/javascript">
+    $('#login_rd').dialog({
+    	autoOpen : false,
+    	resizable : false,
+    	draggable: false,
+    	position: ['center', 10],
+    	modal : true,
+    	title : '<div class="widget-header"><h4><i class="icon-ok"></i>로그인</h4></div>',
+    	buttons : [{
+    		html : '취소',
+    		'id' : 'btn_login_cancel',
+    		'class' : 'btn btn-default',
+    		click : function() {
+    			$(this).dialog('close');
+    		}
+    	},
+    	{
+    		html : '확인',
+    		'type':"submit",
+    		'id' : 'btn_login',
+    		'class' : 'btn btn-primary',
+    		 click : function() {
+    			 
+    			 f_login();
+    				/* $("#frmLogin").ajaxSubmit({
+    					type: 'POST',
+    					url: '/loginProcess',
+    					success:function(response) {
+    						console.log(response);
+    						alert("로그인완료");
+    						location.href = "/";
+    					}
+    				}); */
+    				return false;
+    		}
+    	}]
+    });
+    
+    
+    $('#signup_rd').dialog({
+    	autoOpen : false,
+    	resizable : false,
+    	draggable: false,
+    	position: ['center', 10],
+    	modal : true,
+    	title : '<div class="widget-header"><h4><i class="icon-ok"></i>회원가입</h4></div>',
+    	buttons : [{
+    		html : '취소',
+    		'id' : 'btn_login_cancel',
+    		'class' : 'btn btn-default',
+    		click : function() {
+    			$(this).dialog('close');
+    		}
+    	},
+    	{
+    		html : '확인',
+    		'type':"submit",
+    		'id' : 'btn_login',
+    		'class' : 'btn btn-primary',
+    		 click : function() {
+    				$("#frmLogin").ajaxSubmit({
+    					type: 'POST',
+    					url: '/loginProcess',
+    					success:function(response) {
+    						console.log(response);
+    						alert("로그인완료");
+    						location.href = "/";
+    					}
+    				});
+    				return false;
+    		}
+    	}]
+    });
+    </script>
+    
     </body>
 
 </html>
