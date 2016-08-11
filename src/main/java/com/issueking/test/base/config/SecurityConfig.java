@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.issueking.test.api.service.user.CustomUserDetailsSevice;
 import com.issueking.test.base.util.CustomAccessDeniedHandler;
 import com.issueking.test.base.util.CustomAuthenticationProvider;
+import com.issueking.test.base.util.CustomLoginFailureHandler;
 import com.issueking.test.base.util.CustomLoginSuccessHandler;
 import com.issueking.test.base.util.CustomLogoutHandler;
 
@@ -36,6 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CustomLogoutHandler customLogoutHandler() {
         return new CustomLogoutHandler();
+    }
+    
+    @Bean
+    public CustomLoginFailureHandler customLoginFailureHandler() {
+        return new CustomLoginFailureHandler();
     }
     
     @Bean
@@ -73,8 +79,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/loginProcess")
                 .successHandler(customLoginSuccessHandler())
+                .failureHandler(customLoginFailureHandler())
                 //.defaultSuccessUrl("/index", true)
-                .failureUrl("/login/signin?fail=true")
+                //.failureUrl("/index")
         .and()
             .logout()
                 .logoutUrl("/logout")
@@ -88,8 +95,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         
-        ReflectionSaltSource saltSource = new ReflectionSaltSource();
-        saltSource.setUserPropertyToUse("username");
+/*        ReflectionSaltSource saltSource = new ReflectionSaltSource();
+        saltSource.setUserPropertyToUse("username");*/
         
         auth
         .authenticationProvider(customAuthenticationProvider())

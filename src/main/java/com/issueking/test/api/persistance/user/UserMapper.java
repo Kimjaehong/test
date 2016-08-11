@@ -26,13 +26,13 @@ public interface UserMapper {
     @Insert("INSERT INTO authorities(username, authority) VALUE(#{username}, #{authority})")
     public String insertAuthorities(String username, String authority);*/
     
-    @Insert("INSERT INTO users(username, password, name, enabled) VALUE ( #{username}, #{encodedPassword}, #{name}, #{enabled})")
+    @Insert("INSERT INTO users(username, password, name, enabled) VALUES ( #{username}, #{encodedPassword}, #{name}, #{enabled})")
     public int insertUser(@Param("username") String username, 
                              @Param("encodedPassword") String encodedPassword,
                              @Param("name") String name,
                              @Param("enabled") int enabled);
     
-    @Insert("INSERT INTO authorities(username, privileges) VALUE(#{username}, #{authority})")
+    @Insert("INSERT INTO authorities(username, privileges) VALUES(#{username}, #{authority})")
     public int insertAuthorities(@Param("username") String username,
                                 @Param("authority") String authority);
 }

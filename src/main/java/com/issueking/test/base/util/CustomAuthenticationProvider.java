@@ -32,36 +32,25 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         
-        String username = authentication.getName();
+        String username = (String)authentication.getPrincipal(); 
+        //String username = authentication.getName();
         String password = (String) authentication.getCredentials();
         
-        logger.info(password);
-        
-        Collection<? extends GrantedAuthority> authorities;
-        try {
+        //Collection<? extends GrantedAuthority> authorities;
+
             CustomUserDetails customUserDetails = (CustomUserDetails) customUserDetailsSevice.loadUserByUsername(username);
             
-            if (!passwordEncoder.matches(password, customUserDetails.getPassword())) 
+            if (!passwordEncoder.matches(password, customUserDetails.getPassword())) {
                 throw new BadCredentialsException("비밀번호 불일치");
-     
-            authorities = customUserDetails.getAuthorities();
+            }
+           // authorities = customUserDetails.getAuthorities();
             
-        } catch(UsernameNotFoundException e) {
-            e.printStackTrace();
-            throw new UsernameNotFoundException(e.getMessage());
-        } catch(BadCredentialsException e) {
-            e.printStackTrace();
-            throw new BadCredentialsException(e.getMessage());
-        } catch(Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e.getMessage());
-        }
+            return new UsernamePasswordAuthenticationToken(username, password, customUserDetails.getAuthorities());
  
-        return new UsernamePasswordAuthenticationToken(username, password, authorities);
     }
  
     @Override
-    public boolean supports(Class<?> arg0) {
-        return true;
+    public boolean supports(Class<?> authentication) {
+        return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }

@@ -1,11 +1,45 @@
 /**
  * ==================================================================================
+ * 메인공통 다이얼 로그 설정
+ * ----------------------------------------------------------------------------------
+ * 다이얼 로그 오픈클릭 이벤트와 다이얼 로그 정보로 구성 함
+ * ==================================================================================
+ */
+function f_commonUserRD(url, frmTarget) {
+	// dialog clear
+	var $target = $('#login_rd');
+	$target.empty();
+	
+	var send_data = {
+		frm_target : frmTarget
+	}
+	
+	$.ajax({
+		url: 'view/main/'+url,
+		type: 'GET',
+		headers: {'AJAX':true},
+		data : send_data,
+		success: function(data) {
+			$target.html(data);
+		},
+		error: function(obj) {
+			cf_errViewDialog(obj, $target);
+	    }
+	});
+	$('#login_rd').dialog('open');
+	return false;
+}
+
+
+/**
+ * ==================================================================================
  * 로그인 다이얼 로그 설정
  * ----------------------------------------------------------------------------------
  * 다이얼 로그 오픈클릭 이벤트와 다이얼 로그 정보로 구성 함
  * ==================================================================================
  */
 function f_openLoginRD(frmTarget) {
+	
 	// dialog clear
 	var $target = $('#login_rd');
 	$target.empty();
@@ -32,7 +66,6 @@ function f_openLoginRD(frmTarget) {
 /**
  * ==================================================================================
  * 로그인 실행---------------------------------------------------------------
- * 다이얼 로그 오픈클릭 이벤트와 다이얼 로그 정보로 구성 함
  * ==================================================================================
  */
 function f_login(){
@@ -40,11 +73,41 @@ function f_login(){
 		type: 'POST',
 		url: '/loginProcess',
 		success:function(response) {
-			console.log(response);
 			alert("로그인완료");
 			location.href = "/";
+		},
+		error: function(xhr, textStatus, errorThrown){
+			if (xhr.status == 403) {
+				alert("아이디와 비밀번호를 확인해주세요");
+	        }
 		}
 	});
+}
+/**
+ * ==================================================================================
+ * 로그아웃 실행---------------------------------------------------------------
+ * ==================================================================================
+ */
+function f_logout(){
+	//e.preventDefault();
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    
+    $.ajax({
+       url : 'logout',
+       type : 'POST',
+       data: token,
+       beforeSend:function(xhr){
+            xhr.setRequestHeader(header, token);
+       },
+       success : function(data) { 
+           window.location ="/";
+       }, 
+       error : function(data) {
+           console.log(data);
+       }
+    });
+
 }
 /**
  * ==================================================================================
@@ -77,23 +140,6 @@ function f_openSignupRD(frmTarget) {
 	$('#signup_rd').dialog('open');
 	return false;
 }
-
-
-/*$(document).ready(function() {
-	$("#frmLogin").on('submit', function() {
-		console.log(this)
-		$(this).ajaxSubmit({
-			type: 'POST',
-			url: '/loginProcess',
-			success:function(response) {
-				console.log(response);
-				alert("로그인완료");
-				location.href = "/";
-			}
-		});
-		return false;
-	}); 
-});*/
 
 /**
  * ==================================================================================

@@ -56,7 +56,7 @@
                       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                       <!-- <button type="submit" class="btn btn-primary">Sign up</button>  -->
                       <button type="submit" class="btn btn-primary">Sign up</button>
-        							<a href="javascript:void(0);" onclick="f_signUpCancel();" class="btn btn-default" id="btn-">취소</a>
+        							<a href="javascript:void(0);" onclick="f_signUpCancel();" class="btn btn-default">취소</a>
         						</footer>
         					</form>
         				</div>

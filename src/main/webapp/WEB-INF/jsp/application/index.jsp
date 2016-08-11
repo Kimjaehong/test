@@ -11,6 +11,9 @@
     		<meta name="author" content="">
     		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="_csrf" content="${_csrf.token}"/>
+        <!-- default header name is X-CSRF-TOKEN -->
+        <meta name="_csrf_header" content="${_csrf.headerName}"/>
     		<jsp:include page="/WEB-INF/jsp/include/inc_common_style.jsp" flush="false"/>
     		<jsp:include page="/WEB-INF/jsp/include/inc_common_script.jsp" flush="false"/>
         <script src="${pageContext.request.contextPath}/resources/js/application/login/login.js"></script>  
@@ -27,7 +30,7 @@
             <c:choose>
                 <c:when test="${sessionScope.userId eq null || sessionScope.userId eq ''}">
              <div class="btn-header transparent pull-right">
-                 <span> <a href="javascript:void(0);" id="btn_signup" class="fs-13 pd-rl7 btn-danger" title="회원가입" onclick="f_signupOpen();"> 회원가입 </a> </span>
+                 <span> <a href="javascript:void(0);" id="btn_signup" class="fs-13 pd-rl7 btn-danger" title="회원가입" onclick="f_openSignupRD();"> 회원가입 </a> </span>
             </div>
             <div class="btn-header transparent pull-right">
                 <span> <a href="javascript:void(0);" id="btn_login" class="fs-13 pd-rl7 btn-primary" title="로그인" onclick="f_openLoginRD();"> 로그인 </a> </span>
@@ -38,10 +41,10 @@
                 <span> <a href="javascript:void(0);" id="btn_myinfo" class="fs-13 pd-rl7" title="정보수정" onclick="f_myInfoUN();"> 정보수정 </a> </span>
             </div> 
             <div id="logout" class="btn-header transparent pull-right">
-                <form action="<c:url value="/logout"/>" method="post">
+               <%--  <form action="<c:url value="/logout"/>" method="post">
                    <button type="submit" class="btn">Log out</button>
-                   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                </form>
+                </form> --%>
+                <span><a href="javascript:void(0);" id="btn_logout" class="fs-13 pd-rl7 btn-danger" title="로그아웃" onclick="f_logout();"> 로그아웃 </a></span>
             </div>
             <div class="pull-right">
                 <div style="margin-top: 10px; padding: 3px;"><c:out value="${sessionScope.userName}" /> 님(<c:out value="${sessionScope.adminConnTime}" />)</div>
@@ -56,7 +59,7 @@
         <%-- <jsp:include page="/WEB-INF/jsp/include/inc_login_user.jsp" flush="false"/> --%>
         
         <!-- left menu -->
-        <%-- <jsp:include page="/WEB-INF/jsp/include/inc_left_menu.jsp" flush="false"/> --%>
+        <jsp:include page="/WEB-INF/jsp/include/inc_left_menu.jsp" flush="false"/>
     </aside>
         
     <div id="main" role="main">
@@ -67,15 +70,6 @@
             <ol class="breadcrumb">
             </ol>
         </div>
-        <%-- <c:choose>
-            <c:when test="${sessionScope.userId eq null || sessionScope.userId eq ''}">
-                <jsp:include page="/WEB-INF/jsp/application/login.jsp" flush="false"/>
-                <jsp:include page="/WEB-INF/jsp/application/signup.jsp" flush="false"/>
-            </c:when>
-            <c:otherwise>
-           <jsp:include page="/WEB-INF/jsp/include/inc_myinfo.jsp" flush="false"/>
-        </c:otherwise>
-        </c:choose> --%>
         <div id="content">
     
         </div>
@@ -96,6 +90,7 @@
     <div id="signup_rd"></div>
     
     <script type="text/javascript">
+    
     $('#login_rd').dialog({
     	autoOpen : false,
     	resizable : false,
@@ -117,17 +112,7 @@
     		'id' : 'btn_login',
     		'class' : 'btn btn-primary',
     		 click : function() {
-    			 
     			 f_login();
-    				/* $("#frmLogin").ajaxSubmit({
-    					type: 'POST',
-    					url: '/loginProcess',
-    					success:function(response) {
-    						console.log(response);
-    						alert("로그인완료");
-    						location.href = "/";
-    					}
-    				}); */
     				return false;
     		}
     	}]
@@ -155,15 +140,7 @@
     		'id' : 'btn_login',
     		'class' : 'btn btn-primary',
     		 click : function() {
-    				$("#frmLogin").ajaxSubmit({
-    					type: 'POST',
-    					url: '/loginProcess',
-    					success:function(response) {
-    						console.log(response);
-    						alert("로그인완료");
-    						location.href = "/";
-    					}
-    				});
+    				
     				return false;
     		}
     	}]
