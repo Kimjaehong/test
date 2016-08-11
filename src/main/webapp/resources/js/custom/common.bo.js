@@ -16,10 +16,15 @@ function cf_activeUrl() {
 		} catch (err) {}
 	}
 	if (url) {
+//		console.log("22222222222222222");
+//		console.log(url);
 		$('nav li.active').removeClass("active");
+//		console.log($('nav li:has(a[href="' + url + '"])'));
 		$('nav li:has(a[href="' + url + '"])').addClass("active");
 		$('nav').find('.active').each(function(){
 			var compare_url = $(this).children('a').attr('href');
+//			console.log(compare_url);
+//			console.log(url);
 			if(compare_url != url) {
 				$(this).addClass("open");
 			}
@@ -998,6 +1003,8 @@ function f_legendTemplate(target, data) {
  * ==================================================================================
  */
 function cf_setUrl(url, params) {
+	console.log(url);
+	console.log(params);
 	window.location.href = main_index_url + '#' + url;
 	window.location.hash = url;
 	loadURL(url + '?' + params, $('#content'));

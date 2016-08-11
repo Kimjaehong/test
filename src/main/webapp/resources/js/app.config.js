@@ -28,7 +28,7 @@
  *
  * Default Main Page
  */
-	//var init_page = '/mngt/view/main/dashboard';
+	var init_page = 'view/main/main';
 
 /*
  * My Info Page Close Fnc Call

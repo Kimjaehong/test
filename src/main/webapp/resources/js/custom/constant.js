@@ -31,7 +31,7 @@ var true_val = 'Y';
 var false_val = 'N';
 
 // 메인 인덱스 페이지 View 경로
-var main_index_url = '/view/main/index';
+var main_index_url = '/';
 
 // 미리보기 없음 이미지 경로
 var noImgPath = '/resources/img/noPreview.png';

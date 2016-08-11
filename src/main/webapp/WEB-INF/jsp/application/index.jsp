@@ -11,9 +11,10 @@
     		<meta name="author" content="">
     		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <meta name="_csrf" content="${_csrf.token}"/>
         <!-- default header name is X-CSRF-TOKEN -->
+        <meta name="_csrf" content="${_csrf.token}"/>
         <meta name="_csrf_header" content="${_csrf.headerName}"/>
+        
     		<jsp:include page="/WEB-INF/jsp/include/inc_common_style.jsp" flush="false"/>
     		<jsp:include page="/WEB-INF/jsp/include/inc_common_script.jsp" flush="false"/>
         <script src="${pageContext.request.contextPath}/resources/js/application/login/login.js"></script>  
@@ -41,31 +42,25 @@
                 <span> <a href="javascript:void(0);" id="btn_myinfo" class="fs-13 pd-rl7" title="정보수정" onclick="f_myInfoUN();"> 정보수정 </a> </span>
             </div> 
             <div id="logout" class="btn-header transparent pull-right">
-               <%--  <form action="<c:url value="/logout"/>" method="post">
-                   <button type="submit" class="btn">Log out</button>
-                </form> --%>
-                <span><a href="javascript:void(0);" id="btn_logout" class="fs-13 pd-rl7 btn-danger" title="로그아웃" onclick="f_logout();"> 로그아웃 </a></span>
+                <span><a href="javascript:void(0);" id="btn_logout" class="fs-13 pd-rl7" title="로그아웃" onclick="f_logout();"> 로그아웃 </a></span>
             </div>
-            <div class="pull-right">
+            <%-- <div class="pull-right">
                 <div style="margin-top: 10px; padding: 3px;"><c:out value="${sessionScope.userName}" /> 님(<c:out value="${sessionScope.adminConnTime}" />)</div>
-            </div>
+             </div> --%>
             	</c:otherwise>
             </c:choose>
         </div>
     </header>
     
     <aside id="left-panel">
-        <!-- User info -->
-        <%-- <jsp:include page="/WEB-INF/jsp/include/inc_login_user.jsp" flush="false"/> --%>
-        
-        <!-- left menu -->
+        <jsp:include page="/WEB-INF/jsp/include/inc_user_info.jsp" flush="false"/>
         <jsp:include page="/WEB-INF/jsp/include/inc_left_menu.jsp" flush="false"/>
     </aside>
         
     <div id="main" role="main">
         <div id="ribbon">
             <span class="ribbon-button-alignment"> 
-                <span class="btn btn-ribbon" onclick="f_lnkDashBoard();"><i class="fa fa-home"></i></span> 
+                <span class="btn btn-ribbon" onclick="f_lnkMain();"><i class="fa fa-home"></i></span> 
             </span>
             <ol class="breadcrumb">
             </ol>
@@ -84,6 +79,29 @@
     <!--[if IE 8]>
         <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
     <![endif]-->
+    
+    <div style="display: none;" id="shortcut">
+        <ul>
+            <li>
+                <a href="#ajax/inbox.html" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-envelope fa-4x"></i> <span>Mail <span class="label pull-right bg-color-darken">14</span></span> </span> </a>
+            </li>
+            <li>
+                <a href="#ajax/calendar.html" class="jarvismetro-tile big-cubes bg-color-orangeDark"> <span class="iconbox"> <i class="fa fa-calendar fa-4x"></i> <span>Calendar</span> </span> </a>
+            </li>
+            <li>
+                <a href="#ajax/gmap-xml.html" class="jarvismetro-tile big-cubes bg-color-purple"> <span class="iconbox"> <i class="fa fa-map-marker fa-4x"></i> <span>Maps</span> </span> </a>
+            </li>
+            <li>
+                <a href="#ajax/invoice.html" class="jarvismetro-tile big-cubes bg-color-blueDark"> <span class="iconbox"> <i class="fa fa-book fa-4x"></i> <span>Invoice <span class="label pull-right bg-color-darken">99</span></span> </span> </a>
+            </li>
+            <li>
+                <a href="#ajax/gallery.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i class="fa fa-picture-o fa-4x"></i> <span>Gallery </span> </span> </a>
+            </li>
+            <li>
+                <a href="#ajax/profile.html" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"> <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>My Profile </span> </span> </a>
+            </li>
+        </ul>
+    </div>
     
     <jsp:include page="/WEB-INF/jsp/include/inc_plugins_script.jsp" flush="false"/>
     <div id="login_rd"></div>    

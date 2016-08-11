@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.issueking.test.api.service.user.UserService;
-import com.issueking.test.view.HelloController;
+import com.issueking.test.view.index.ViewIndexController;
 
 @Controller
 @RequestMapping("apis/user")
 public class UserController {
     
-    private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ViewIndexController.class);
     
     @Autowired
     private UserService userService;

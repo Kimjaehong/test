@@ -32,8 +32,6 @@ public class MenuController {
     @ResponseBody
     public Object readMenuList() throws Exception {
         
-        /*HttpSession session = request.getSession();*/
-        
         List<Map<String, Object>> menuList = menuMapper.readMenuList();
         logger.debug("menuList:::::::::::::::"+menuList);
         
@@ -42,15 +40,6 @@ public class MenuController {
         logger.debug("gropMenuList:::::::::::::::"+groupMenuList);
         
         Map<String, Object> result = new HashMap<String, Object>();
-        
-        /*Iterator<String> iterator = groupMenuList.keySet().iterator();
-        while (iterator.hasNext()) {
-            String key = (String) iterator.next();
-            //System.out.print("key="+key);
-            //.out.println(" value="+result.get(key));
-            String LowerKey = key.toLowerCase();
-            result.put(LowerKey, result.get(key));
-        }*/
         
         result.put("menu_list", groupMenuList);
         

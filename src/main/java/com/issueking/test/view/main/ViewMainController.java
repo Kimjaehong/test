@@ -26,4 +26,14 @@ public class ViewMainController {
     public String signupPage() {
         return "application/main/signupRD";
     }
+    
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    public String mainPage() {
+        return "application/main/main";
+    }
+    
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String testPage() {
+        return "application/main/test";
+    }
 }

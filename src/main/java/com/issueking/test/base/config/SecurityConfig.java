@@ -15,11 +15,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.issueking.test.api.service.user.CustomUserDetailsSevice;
-import com.issueking.test.base.util.CustomAccessDeniedHandler;
+import com.issueking.test.base.handler.CustomAccessDeniedHandler;
+import com.issueking.test.base.handler.CustomLoginFailureHandler;
+import com.issueking.test.base.handler.CustomLoginSuccessHandler;
+import com.issueking.test.base.handler.CustomLogoutHandler;
 import com.issueking.test.base.util.CustomAuthenticationProvider;
-import com.issueking.test.base.util.CustomLoginFailureHandler;
-import com.issueking.test.base.util.CustomLoginSuccessHandler;
-import com.issueking.test.base.util.CustomLogoutHandler;
 
 @Configuration
 @EnableWebSecurity
