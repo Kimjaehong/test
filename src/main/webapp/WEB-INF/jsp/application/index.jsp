@@ -108,61 +108,9 @@
     <div id="signup_rd"></div>
     
     <script type="text/javascript">
-    
-    $('#login_rd').dialog({
-    	autoOpen : false,
-    	resizable : false,
-    	draggable: false,
-    	position: ['center', 10],
-    	modal : true,
-    	title : '<div class="widget-header"><h4><i class="icon-ok"></i>로그인</h4></div>',
-    	buttons : [{
-    		html : '취소',
-    		'id' : 'btn_login_cancel',
-    		'class' : 'btn btn-default',
-    		click : function() {
-    			$(this).dialog('close');
-    		}
-    	},
-    	{
-    		html : '확인',
-    		'type':"submit",
-    		'id' : 'btn_login',
-    		'class' : 'btn btn-primary',
-    		 click : function() {
-    			 f_login();
-    				return false;
-    		}
-    	}]
-    });
-    
-    
-    $('#signup_rd').dialog({
-    	autoOpen : false,
-    	resizable : false,
-    	draggable: false,
-    	position: ['center', 10],
-    	modal : true,
-    	title : '<div class="widget-header"><h4><i class="icon-ok"></i>회원가입</h4></div>',
-    	buttons : [{
-    		html : '취소',
-    		'id' : 'btn_login_cancel',
-    		'class' : 'btn btn-default',
-    		click : function() {
-    			$(this).dialog('close');
-    		}
-    	},
-    	{
-    		html : '확인',
-    		'type':"submit",
-    		'id' : 'btn_login',
-    		'class' : 'btn btn-primary',
-    		 click : function() {
-    				
-    				return false;
-    		}
-    	}]
-    });
+    loginDialogCall();
+    signupDialogCall();
+
     </script>
     
     </body>

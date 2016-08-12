@@ -1003,6 +1003,7 @@ function f_legendTemplate(target, data) {
  * ==================================================================================
  */
 function cf_setUrl(url, params) {
+	console.log("setURL");
 	console.log(url);
 	console.log(params);
 	window.location.href = main_index_url + '#' + url;

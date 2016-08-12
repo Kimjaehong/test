@@ -12,7 +12,7 @@
 '수정사유/내역 : 
 ==========================================================================================================
 --%>
-<script src="${pageContext.request.contextPath}/resources/js/application/error/page.access.error.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/js/application/error/page.access.error.js"></script> --%>
 <section id="widget-grid" class="">
 
 <h2>메인페이지</h2>
@@ -89,7 +89,7 @@
 	</div> -->
 </section>
 <!-- end widget grid -->
-<script src="${pageContext.request.contextPath}/resources/js/application/dashboard/dashboard.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/js/application/dashboard/dashboard.js"></script> --%>
 <script type="text/javascript">
 /**
  * ==================================================================================

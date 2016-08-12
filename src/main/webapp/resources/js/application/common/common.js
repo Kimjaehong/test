@@ -1,3 +1,62 @@
+function loginDialogCall() {
+    $('#login_rd').dialog({
+    	autoOpen : false,
+    	resizable : false,
+    	draggable: false,
+    	position: ['center', 10],
+    	modal : true,
+    	title : '<div class="widget-header"><h4><i class="icon-ok"></i>로그인</h4></div>',
+    	buttons : [{
+    		html : '취소',
+    		'id' : 'btn_login_cancel',
+    		'class' : 'btn btn-default',
+    		click : function() {
+    			$(this).dialog('close');
+    		}
+    	},
+    	{
+    		html : '확인',
+    		'type':"submit",
+    		'id' : 'btn_login',
+    		'class' : 'btn btn-primary',
+    		 click : function() {
+    			 f_login();
+    				return false;
+    		}
+    	}]
+    });
+}
+
+function signupDialogCall() {
+	
+	$('#signup_rd').dialog({
+    	autoOpen : false,
+    	resizable : false,
+    	draggable: false,
+    	position: ['center', 10],
+    	modal : true,
+    	title : '<div class="widget-header"><h4><i class="icon-ok"></i>회원가입</h4></div>',
+    	buttons : [{
+    		html : '취소',
+    		'id' : 'btn_login_cancel',
+    		'class' : 'btn btn-default',
+    		click : function() {
+    			$(this).dialog('close');
+    		}
+    	},
+    	{
+    		html : '확인',
+    		'type':"submit",
+    		'id' : 'btn_login',
+    		'class' : 'btn btn-primary',
+    		 click : function() {
+    				
+    				return false;
+    		}
+    	}]
+    });
+}
+
 /**
  * ==================================================================================
  * 정보 셋팅 (내정보 수정 화면)

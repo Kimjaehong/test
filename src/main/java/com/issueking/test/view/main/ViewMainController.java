@@ -19,12 +19,12 @@ public class ViewMainController {
 	 
     @RequestMapping(value = "/loginRD", method = RequestMethod.GET)
     public String loginPage() {
-        return "application/main/loginRD";
+        return "application/common/loginRD";
     }
     
     @RequestMapping(value = "/signupRD", method = RequestMethod.GET)
     public String signupPage() {
-        return "application/main/signupRD";
+        return "application/common/signupRD";
     }
     
     @RequestMapping(value = "/main", method = RequestMethod.GET)
